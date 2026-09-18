@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    
-    tools {
-        // Option 1-la neenga JDK-ku enna 'Name' kudutheengalo athai inge podanum
-        jdk 'Java21' 
-    }
 
     stages {
         stage('Checkout') {
@@ -13,11 +8,10 @@ pipeline {
             }
         }
         
-        stage('Check Java Version') {
+        stage('Test Python') {
             steps {
-                // Java sariya update aagi irukka nu check panna
-                sh 'java -version'
-                sh 'javac -version'
+                echo 'Running Python application...'
+                sh 'python3 app.py' 
             }
         }
 
@@ -27,12 +21,6 @@ pipeline {
                 sh 'javac app.java'
             }
         }
-        
-        stage('Run Python') {
-            steps {
-                echo 'Running Python application...'
-                sh 'python3 app.py' 
-            }
-        }
     }
 }
+
